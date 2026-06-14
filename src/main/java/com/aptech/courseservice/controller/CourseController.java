@@ -1,28 +1,19 @@
 package com.aptech.courseservice.controller;
 
-import com.aptech.courseservice.model.Course;
-import com.aptech.courseservice.repository.CourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.MediaType;
+import reactor.core.publisher.Flux;
+import java.time.Duration;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api")
 public class CourseController {
 
-    @Autowired
-    private CourseRepository courseRepository;
-
-    @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-        Course savedCourse = courseRepository.save(course);
-        return ResponseEntity.ok(savedCourse);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        return ResponseEntity.ok(courseRepository.findAll());
+    @GetMapping(value = "/news/live", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> getLiveNews() {
+        return Flux.interval(Duration.ofSeconds(1))
+                .map(sequence -> "Live News Update #" + sequence + " - Streaming Successfully!");
     }
 }
