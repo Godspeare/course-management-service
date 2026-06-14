@@ -1,0 +1,8 @@
+POST http://localhost:8081/courses
+Content-Type: application/json
+
+{
+  "title": "Full-Stack Web Development",
+  "description": "Learn Spring Boot, Hibernate, and Reactive WebFlux Architecture",
+  "duration": "12 Weeks"
+}
