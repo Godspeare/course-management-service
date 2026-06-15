@@ -8,12 +8,12 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/courses")
 public class CourseController {
 
-    @GetMapping(value = "/news/live", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/live", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getLiveNews() {
         return Flux.interval(Duration.ofSeconds(1))
-                .map(sequence -> "Live News Update #" + sequence + " - Streaming Successfully!");
+                .map(sequence -> "Live Course Update #" + sequence + " - Streaming Successfully!");
     }
 }
